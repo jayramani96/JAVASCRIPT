@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Enter First Number -
+    <input type="text" id="f1"></h1>
+
+    <h1>Enter Second Number -
+    <input type="text" id="f2"></h1>
+
+    <h1>Enter Third Number -
+    <input type="text" id="f3"></h1>
+
+    
+    <h1 id="ans">Ans</h1>
+
+</body>
+</html>
+
+<script>
+
+    let a = document.getElementById("f1").value
+    let b = document.getElementById("f2").value
+    let c = document.getElementById("f3").value
+    
+    document.getElementById("ans").innerHTML = (+a + +b + +c) * 5
+
+    console.log((+a + +b + +c) * 5)
+
+</script>
