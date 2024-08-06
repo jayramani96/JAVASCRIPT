@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Head-First</h1>
+    <h1>Head-First</h1>
+    <h1>Head-First</h1>
+    <h1>Head-First</h1><br><br><br>
+
+    <h3>Head-First</h3>
+    <h3>Head-Second</h3>
+    <h3>Head-Three</h3>
+    <h3>Head-Four</h3><br><br><br>
+
+    <h5>Head-Blue</h5>
+    <h5>Head-Blue</h5>
+    <h5>Head-Blue</h5>
+    <h5>Head-Blue</h5>
+    <button id="bt">click</button>
+</body>
+</html>
+
+<script>
+    let btn = document.getElementById("bt")
+
+    btn.addEventListener("click",function(){
+        let heading = document.querySelector('h1');
+        heading.style.color ='red'
+
+    
+
+
+        let heading2 = document.querySelectorAll('h3');
+        for(let i=0; i<heading2.length; i++){
+            heading2[i].style.color ='green'
+        }
+
+    
+
+
+        let heading3 = document.querySelectorAll('h5');
+        for(let i=0; i<heading3.length; i++){
+            heading3[i].style.color ='blue'
+        }
+
+    })
+
+
+</script>
