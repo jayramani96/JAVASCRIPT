@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setatimeout</title>
+</head>
+<body>
+    <h1 id="heading"></h1>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("document loaded successfully");
+            setTimeout(() => {
+                document.getElementById("heading").textContent = "this statemene print after 4 second."
+            }, 4000);
+        })
+    </script>
+</body>
+</html>
