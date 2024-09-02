@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <style>
+        .listr{
+            margin: auto;
+            background-color: rgb(10, 10, 72);
+            padding-left: 90px;
+            padding-top: 20px;
+            height: 180px;
+            width: 400px;
+        }
+        #list{
+            height: auto;
+            width: 245px;
+            border: 2px solid gray;
+            color: white;
+            font-size: 20px;
+        }
+        #name{
+            border: 1px solid black;
+            padding: 12px 15px;
+            font-size: 17px;
+        }
+        #btn{
+            padding: 12px 10px;
+            font-size: 15px;    
+        }
+
+    </style>
+</head>
+<body>
+    <div class="listr">
+        <input type="text" id="name">
+    <button id="btn">Add</button>
+    <ul id="list"></ul>
+
+    </div>
+    <script>
+        let btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            let newElement = document.createElement("li")
+           newElement.innerHTML = document.getElementById("name").value
+
+           document.getElementById("list").append(newElement);
+
+           document.getElementById("name").value = "";
+        })
+           
+
+    </script>
+</body>
+</html>
