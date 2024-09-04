@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width: 500px;
+            height: 80px;
+            margin: auto;
+            position: relative;
+            top: 20px;
+        }
+        #name{
+            height: 35px;
+            border: 4px double black;
+            border-radius: 10px;
+        }
+        #subject{
+            height: 35px;
+            border: 4px double black;
+            border-radius: 10px;
+        }
+        #subm{
+            height: 40px;
+            border: 4px solid black;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        table{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="addData(event)">
+        <input type="text" placeholder="Enter Your Name" id="name">
+        <input type="text" placeholder="Enter Your Subject" id="subject">
+        <input type="submit" id="subm">
+    </form>
+
+    <table border="1" width="35%">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+        let name = document.getElementById("name");
+        let subject = document.getElementById("subject");
+
+        function addData(event){
+            event.preventDefault()
+
+            let existingData = JSON.parse(localStorage.getItem("student")) || [];
+
+            let obj = {
+                name : name.value,
+                subject : subject.value
+            }
+            existingData.push(obj)
+
+            localStorage.setItem("student",JSON.stringify(existingData))
+
+            name.value= ""
+            subject.value= ""
+
+        }
+    </script>
+</body>
+</html>
