@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form and Display</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    
+
+            <div class="container">
+                <div class="form-container">
+                    <form onsubmit="getData(event)" class="form">
+                        <input type="url" id="image-url" placeholder=" URL" class="input" required>
+                        <input type="text" id="image-title" placeholder=" Title" class="input" required>
+                        <input type="text" id="image-price" placeholder=" Price" class="input" required>
+                        <button type="submit" id="add-btn" class="button" style="border: 2px solid yellowgreen;">Add</button>
+                    </form>
+                </div>
+
+            <!-- <div class="spacer"></div> -->
+
+            <div class="display-container">
+                <div id="show-div" class="show-div">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+    
+
+    </body>
+
+    <script>
+        let url = document.getElementById('image-url');
+        let title = document.getElementById('image-title');
+        let price = document.getElementById('image-price');
+        let button = document.getElementById('add-btn');
+        let showDiv = document.getElementById('show-div');
+
+
+        window.onload = () => {
+            let existingData = JSON.parse(localStorage.getItem("product")) || [];
+            existingData.forEach(product => {
+                showData(product);
+            });
+        }
+
+        const getData = (event) => {
+            event.preventDefault();
+
+            let product = {
+                id: Date.now(),
+                url: url.value,
+                title: title.value,
+                price: price.value,
+            }
+
+            let existingData = JSON.parse(localStorage.getItem("product")) || [];
+
+            existingData.push(product);
+
+            localStorage.setItem("product", JSON.stringify(existingData));
+
+            url.value = "";
+            title.value = "";
+            price.value = "";
+
+            showData(product);
+        }
+
+        const showData = (product) => {
+            let dataDiv = document.createElement("div");
+            dataDiv.innerHTML = `
+        
+ 
+            <div class="product-card">
+                <img class="product-image" src="${product.url}" alt="Image Title">
+                <div class="product-info">
+                    <h3 class="product-title">${product.title}</h3>
+                    <p class="product-price">$${product.price}</p>
+                </div>
+                <div class="product-actions">
+                    <button onclick="deleteItem(${product.id})" class="action-button delete-button">Delete</button>
+                    <button onclick="editItem(${product.id})" class="action-button edit-button">Edit</button>
+                </div>
+            </div>
+
+
+
+    
+    `;
+            showDiv.append(dataDiv);
+        }
+
+
+        const deleteItem = (id) => {
+            let getData = JSON.parse(localStorage.getItem('product')) || [];
+
+            let filteredData = getData.filter(data => data.id !== id);
+
+            localStorage.setItem('product', JSON.stringify(filteredData));
+
+            showDiv.innerHTML = "";
+
+            filteredData.forEach(product => {
+                showData(product);
+            });
+        };
+
+
+
+
+        const editItem = (id) => {
+    let existingData = JSON.parse(localStorage.getItem('product')) || [];
+    let product = existingData.find(product => product.id === id);
+
+    if (product) {
+        url.value = product.url;
+        title.value = product.title;
+        price.value = product.price;
+
+        button.textContent = "Update Product";  
+
+        button.onclick = function () {
+            product.url = url.value;
+            product.title = title.value;
+            product.price = price.value;
+
+            localStorage.setItem("product", JSON.stringify(existingData));
+
+            url.value = "";
+            title.value = "";
+            price.value = "";
+            button.textContent = "Add Product";
+            button.onclick = getData;
+
+            showDiv.innerHTML = "";  
+            existingData.forEach(product => {
+                showData(product);  
+            });
+        };
+    }
+};
+
+
+        // const editItem = (id) => {
+        //     let existingData = JSON.parse(localStorage.getItem('product')) || [];
+        //     let product = existingData.find(product => product.id === id);
+
+        //     if (product) {
+        //         url.value = product.url;
+        //         title.value = product.title;
+        //         price.value = product.price;
+
+        //         button.textContent = "Update Product";
+
+
+        //         button.onclick = function (event) {
+        //             existingData = JSON.parse(localStorage.getItem('product')) || [];
+
+
+        //             event.preventDefault();
+
+        //             product.url = url.value;
+        //             product.title = title.value;
+        //             product.price = price.value;
+
+        //             localStorage.setItem("product", JSON.stringify(existingData));
+
+        //             url.value = "";
+        //             title.value = "";
+        //             price.value = "";
+        //             button.textContent = "Add Product";
+                
+        //             showDiv.innerHTML = "";
+
+        //             let updatedData = JSON.parse(localStorage.getItem('product')) || [];
+        //             updatedData.forEach(product => {
+        //                 showData(product);
+        //             });
+        //         };
+        //     }
+        // };
+    </script>
+
+    </html>
