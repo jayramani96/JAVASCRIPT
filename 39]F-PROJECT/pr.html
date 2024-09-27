@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="m">
+        <h1>Product Management</h1>
+
+        <div class="form-container">
+            <form id="productForm">
+                <input type="text" id="productName" placeholder="Product Name" required>
+                <input type="number" id="productPrice" placeholder="Product Price" required>
+                <input type="hidden" id="editIndex">
+                <button type="submit" id="submitButton">Add Product</button>
+            </form>
+        </div>
+
+        <div class="product-list">
+            <h2>Product List</h2>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productForm = document.getElementById('productForm');
+        const productName = document.getElementById('productName');
+        const productPrice = document.getElementById('productPrice');
+        const productTable = document.querySelector('#productTable tbody');
+        const editIndexInput = document.getElementById('editIndex');
+        const submitButton = document.getElementById('submitButton');
+
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+
+        function renderProducts() {
+            productTable.innerHTML = '';
+            products.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>
+                    <button onclick="editProduct(${index})">Edit</button>
+                    <button onclick="deleteProduct(${index})">Delete</button>
+                </td>
+            `;
+                productTable.appendChild(row);
+            });
+        }
+
+        productForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const newProduct = {
+                name: productName.value,
+                price: productPrice.value
+            };
+
+            const editIndex = editIndexInput.value;
+
+            if (editIndex) {
+                // Update existing product
+                products[editIndex] = newProduct;
+                editIndexInput.value = '';
+                submitButton.textContent = 'Add Product';
+            } else {
+                // Add new product
+                products.push(newProduct);
+            }
+
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+            productName.value = '';
+            productPrice.value = '';
+        });
+
+        window.editProduct = function (index) {
+            const product = products[index];
+            productName.value = product.name;
+            productPrice.value = product.price;
+            editIndexInput.value = index; // Set the index to the hidden input
+            submitButton.textContent = 'Update Product'; // Change button text
+        };
+
+        window.deleteProduct = function (index) {
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+        };
+
+        renderProducts();
+    });
+</script>
