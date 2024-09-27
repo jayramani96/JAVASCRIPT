@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url(https://img.freepik.com/premium-vector/white-product-podium-with-green-tropical-palm-leaves-golden-round-arch-green-background-background-product-presentation-vector-illustration_1250180-17.jpg?uid=R140145020&ga=GA1.1.211378112.1705390760&semt=ais_hybrid);
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.m{
+    height: auto;
+    width: 70%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.438);
+    padding-bottom: 40px;
+}
+
+h1{
+    padding-top: 20px;
+    margin-top: 150px;
+}
+
+.form-container {
+    margin-top: 20px;
+}
+
+form input {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #080000c5;
+    border-radius: 8px;
+    font-weight: 600;
+    /* color: #8d8b8b; */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.267);
+}
+
+form ::placeholder{
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0911f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+}
+button:hover{
+    background-color: transparent;
+    color: #0911f3;
+    border: 1.5px solid #0911f3;
+}
+
+.product-list {
+    margin-top: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 2px solid #0e0101c5;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
